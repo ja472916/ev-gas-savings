@@ -60,7 +60,34 @@
       <input id="mpkwh" type="number" value="2.9" />
     </td>
   </tr>  
+ </tbody></table>
+ 
+<p>
+<button onclick="calculateFuelCost(); return false;" style="font-size: 120%;">Calculate</button>
+</p>
   
+<h3 id="result"></h3>
+<ul>
+  <li>Gas Total Cost: <h4 id="gasresult">
+  </h4>
+  </li><li>Electricity Total Cost: <h4 id="elecresult"></h4>
+</li></ul>
+  
+</form>
+
+<script>
+  function kwhpmToMpkwh(kwhpm) {
+    if (isNaN(kwhpm) || kwhpm <= 0) {
+      return 0;
+    }  
+    return 100 / kwhpm;
+  }
+  
+  function calculateFuelCost() {
+    const miles = parseFloat(document.getElementById('distance').value);
+    const mpg = parseFloat(document.getElementById('efficiency').value);
+    const gascost = parseFloat(document.getElementById('price').value);
+       
 
 
 </body></html>
