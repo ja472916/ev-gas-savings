@@ -1,0 +1,49 @@
+<html><body>
+<p>Fuel Savings estimates on <a href="https://www.fueleconomy.gov">www.fueleconomy.gov</a>, car window stickers, and other sources base their comparisons off of fuel costs of the average new vehicle, and do not consider local prices of gas or electricity.&nbsp;</p><p>Even if an EV is a net positive for carbon emissions as compared to an equivalent gas vehicle, will it actually result in fuel savings for you, based on your driving style, city/highway mixture of driving, and how long you intend to keep the vehicle? This calculator lets you determine this.</p>
+
+<style>
+  .small-label {
+    font-size: 80%;
+  }
+</style>
+
+<form id="computeForm">
+<p>
+  <label class="small-label">Total # of miles for which you expect to keep the EV:</label><br />
+  <input id="distance" placeholder="# of miles" type="number" value="100000" />
+</p
+ 
+<p>
+  <label class="small-label">Average MPG achieved on your current gasoline-powered vehicle:</label><br />
+  <input id="efficiency" placeholder="MPG on gasoline-powered vehicle" type="number" value="30" />
+</p>
+  
+<p>
+  <label class="small-label">Cost per gallon of gas:</label><br />
+  <input id="price" type="number" value="3.50" />
+</p>
+ 
+<p>
+  <label class="small-label">Cost per Kilowatt hour of electricity (found on your electrical bill):</label><br />
+  <input id="kwhc" type="number" value="0.30" />
+</p>
+ 
+  <style>
+        @media screen and (max-width: 600px) {
+            .wrap-column {
+                display: table-cell;
+            }
+            /* Change the layout for small screens */
+            .wrap-column {
+                display: block;
+                width: 100%;
+                box-sizing: border-box;
+            }
+
+            .wrap-column:nth-child(3) {
+                display: block;
+                margin-top: 10px;
+            }
+        }
+  </style>
+</body></html>
