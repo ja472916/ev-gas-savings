@@ -1,4 +1,6 @@
 <html><body>
+EV fuel savings calculator used on https://tricklecharge.blogspot.com
+  
 <p>Fuel Savings estimates on <a href="https://www.fueleconomy.gov">www.fueleconomy.gov</a>, car window stickers, and other sources base their comparisons off of fuel costs of the average new vehicle, and do not consider local prices of gas or electricity.&nbsp;</p><p>Even if an EV is a net positive for carbon emissions as compared to an equivalent gas vehicle, will it actually result in fuel savings for you, based on your driving style, city/highway mixture of driving, and how long you intend to keep the vehicle? This calculator lets you determine this.</p>
 
 <style>
@@ -87,7 +89,58 @@
     const miles = parseFloat(document.getElementById('distance').value);
     const mpg = parseFloat(document.getElementById('efficiency').value);
     const gascost = parseFloat(document.getElementById('price').value);
-       
+    const eleccost = parseFloat(document.getElementById('kwhc').value);
+    var mpkwh = parseFloat(document.getElementById('mpkwh').value);
+    const kwhpm = parseFloat(document.getElementById('kwhpm').value);
+    
+    if (isNaN(mpkwh) || mpkwh == '') {
+      mpkwh = kwhpmToMpkwh(kwhpm);
+    }
+    
+    document.getElementById('gasresult').innerText = ``;
+    document.getElementById('elecresult').innerText = ``;
+    
+    if (isNaN(miles) || miles == '') {
+      document.getElementById('result').innerText = 'Please enter valid value for Total # of miles for which you expect to keep the EV';
+      return;
+    }
+    
+    if (isNaN(mpg) || mpg == '' || mpg <= 0) {
+      document.getElementById('result').innerText = 'Please enter valid value for Average MPG achieved on your current gasoline-powered vehicle';
+      return;
+    }
+    
+    if (isNaN(gascost) || gascost == '') {
+      document.getElementById('result').innerText = 'Please enter valid value for Cost per gallon of gas';
+      return;
+    }
+    
+    if (isNaN(eleccost) || eleccost == '') {
+      document.getElementById('result').innerText = 'Please enter valid value for Cost per Kilowatt hour of electricity';
+      return;
+    }
+    
+    if (isNaN(mpkwh) || mpkwh <= 0) {
+      document.getElementById('result').innerText = 'Please enter valid value for either Kilowatt hours per 100 miles, or Miles per Kilowatt Hour';
+      return;
+    }
+
+    const gallonsUsed = miles / mpg;
+    const gasPrice = gallonsUsed * gascost;
+    const kwhUsed = miles / mpkwh;
+    const elecPrice = eleccost * kwhUsed;
+    
+    if (gasPrice >= elecPrice) {
+      const elecSavings = gasPrice - elecPrice;
+      document.getElementById('result').innerText = `Estimated Total Fuel Savings with EV vs Gas Vehicle: $${elecSavings.toFixed(2)}`;
+    } else {
+      const gasSavings = elecPrice - gasPrice;
+      document.getElementById('result').innerText = `Estimated Total Added Expense with EV vs Gas Vehicle: $${gasSavings.toFixed(2)}`;
+    }
+    document.getElementById('gasresult').innerText = `$${gasPrice.toFixed(2)}`;
+    document.getElementById('elecresult').innerText = `$${elecPrice.toFixed(2)}`;
+  }
+</script>
 
 
 </body></html>
